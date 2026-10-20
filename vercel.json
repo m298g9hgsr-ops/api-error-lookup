@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "regions": ["hkg1", "sin1", "nrt1"],
+  "functions": {
+    "src/app/api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/experiments",
+      "destination": "/api/experiments"
+    }
+  ],
+  "env": {
+    "NEXT_PUBLIC_APP_URL": "https://api-error-lookup.vercel.app",
+    "NODE_ENV": "production"
+  }
+}
