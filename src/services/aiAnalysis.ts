@@ -63,7 +63,9 @@ const OLLAMA_BASE_URL =
 
 // 預設模型：生產用 OpenRouter 免費模型，本地用 Ollama
 const isProduction = process.env.NODE_ENV === 'production' && process.env.VERCEL === '1';
-const DEFAULT_MODEL = process.env.DEFAULT_AI_MODEL || (isProduction ? 'deepseek/deepseek-coder-v2:free' : 'deepseek-coder:6.7b');
+const hasOpenRouterKey = !!process.env.OPENROUTER_API_KEY;
+// 當有 OpenRouter Key 時優先用 OpenRouter 格式模型
+const DEFAULT_MODEL = process.env.DEFAULT_AI_MODEL || (hasOpenRouterKey ? 'deepseek/deepseek-coder-v2:free' : 'deepseek-coder:6.7b');
 
 async function callAI(
   systemPrompt: string, 
