@@ -11,16 +11,6 @@ const nextConfig = {
       bodySizeLimit: '2mb',
     },
   },
-  // Enable standalone output for Docker deployment
-  output: 'standalone',
-  // Ensure Prisma Client is included in standalone build
-  experimental: {
-    serverActions: {
-      bodySizeLimit: '2mb',
-    },
-    // Include necessary files in standalone output
-    outputFileTracingRoot: __dirname,
-  },
 }
 
 module.exports = nextConfig

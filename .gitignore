@@ -49,3 +49,5 @@ next-env.d.ts
 
 # 偵錯
 DEBUG_*
+
+.vercel

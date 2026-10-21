@@ -52,21 +52,40 @@ export interface ExperimentRecord {
   notes?: string;
 }
 
-// Use OpenAI-compatible API endpoint for Ollama
+// OpenRouter (雲端免費模型) - Vercel 生產環境首選
+const OPENROUTER_BASE_URL = 'https://openrouter.ai/api/v1';
+const OPENROUTER_API_KEY = process.env.OPENROUTER_API_KEY;
+
+// Ollama (本地) - 開發環境
 const OLLAMA_BASE_URL =
   process.env.OLLAMA_BASE_URL ||
   (process.env.OLLAMA_HOST ? `${process.env.OLLAMA_HOST.replace(/\/$/, '')}/v1` : 'http://localhost:11434/v1');
-const DEFAULT_MODEL = process.env.DEFAULT_AI_MODEL || 'deepseek-coder:6.7b';
 
-async function callOllama(
+// 預設模型：生產用 OpenRouter 免費模型，本地用 Ollama
+const isProduction = process.env.NODE_ENV === 'production' && process.env.VERCEL === '1';
+const DEFAULT_MODEL = process.env.DEFAULT_AI_MODEL || (isProduction ? 'deepseek/deepseek-coder-v2:free' : 'deepseek-coder:6.7b');
+
+async function callAI(
   systemPrompt: string, 
   userPrompt: string, 
   model: string = DEFAULT_MODEL
 ): Promise<{ response: string; tokensUsed: number; inputTokens: number; outputTokens: number }> {
   const startTime = Date.now();
-  const response = await fetch(`${OLLAMA_BASE_URL}/chat/completions`, {
+  
+  // 優先用 OpenRouter（有 key 且是生產環境）
+  const useOpenRouter = isProduction && OPENROUTER_API_KEY;
+  const baseUrl = useOpenRouter ? OPENROUTER_BASE_URL : OLLAMA_BASE_URL;
+  const headers: Record<string, string> = { 'Content-Type': 'application/json' };
+  
+  if (useOpenRouter) {
+    headers['Authorization'] = `Bearer ${OPENROUTER_API_KEY}`;
+    headers['HTTP-Referer'] = process.env.NEXT_PUBLIC_APP_URL || 'https://api-error-lookup.vercel.app';
+    headers['X-Title'] = 'API Error Lookup';
+  }
+
+  const response = await fetch(`${baseUrl}/chat/completions`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     body: JSON.stringify({
       model,
       messages: [
@@ -81,7 +100,13 @@ async function callOllama(
   });
 
   if (!response.ok) {
-    throw new Error(`Ollama API error: ${response.statusText}`);
+    const errorText = await response.text();
+    // 如果 OpenRouter 失敗且不是本地，嘗試 fallback 到 Ollama（本地開發）
+    if (useOpenRouter && !isProduction) {
+      console.warn('OpenRouter failed, falling back to Ollama:', errorText);
+      return callAI(systemPrompt, userPrompt, 'deepseek-coder:6.7b');
+    }
+    throw new Error(`AI API error (${useOpenRouter ? 'OpenRouter' : 'Ollama'}): ${response.status} ${errorText}`);
   }
 
   const data = await response.json();
@@ -214,7 +239,7 @@ export async function analyzeError(request: AIAnalysisRequest): Promise<AIAnalys
   const userPrompt = prompt.buildUserPrompt(promptRequest);
 
   try {
-    const { response, tokensUsed, inputTokens, outputTokens } = await callOllama(prompt.systemPrompt, userPrompt, model);
+    const { response, tokensUsed, inputTokens, outputTokens } = await callAI(prompt.systemPrompt, userPrompt, model);
     const parsed = parseAIResponse(response);
     const latencyMs = Date.now() - startTime;
 
