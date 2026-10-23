@@ -1,0 +1,33 @@
+# Railway Configuration
+# This file tells Railway how to build and run your application
+
+# Build command
+build:
+  command: "npm run build"
+  
+# Start command
+start:
+  command: "npm run start"
+
+# Environment variables (set these in Railway dashboard)
+# DATABASE_URL="postgresql://user:pass@host:port/db"
+# NEXTAUTH_SECRET="your-secret-here"
+# NEXTAUTH_URL="https://your-app.railway.app"
+# OLLAMA_BASE_URL="http://localhost:11434/v1"
+# DEFAULT_AI_MODEL="deepseek-coder"
+
+# Optional: Custom health check
+healthcheck:
+  path: "/api/health"
+  interval: 30
+  timeout: 10
+
+# Optional: Restart policy
+restart:
+  policy: "on-failure"
+  maxRetries: 3
+
+# Optional: Volume for SQLite (not recommended for production)
+# volumes:
+#   - name: "sqlite-data"
+#     mountPath: "/app/prisma"

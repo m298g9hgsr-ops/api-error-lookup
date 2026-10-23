@@ -1,0 +1,26 @@
+[
+  {
+    "id": "feat-auth-github",
+    "title": "加入 GitHub OAuth 登入",
+    "detail": "使用 NextAuth v5，Provider 為 GitHub，回調儲存用戶到 Prisma User 表",
+    "acceptance": "點擊登入 → 跳轉 GitHub → 回來建立 session → 右上角顯示頭像/名稱"
+  },
+  {
+    "id": "feat-stripe-sub",
+    "title": "接入 Stripe 訂閱（免費/Pro）",
+    "detail": "建立 Checkout Session、Webhook 處理 subscription.created/updated/deleted、同步到 User.plan",
+    "acceptance": "點擊升級 → Stripe Checkout → 付款成功 → 方案顯示 Pro → Webhook 同步 DB"
+  },
+  {
+    "id": "fix-ollama-timeout",
+    "title": "修復 Ollama 偶發 Timeout",
+    "detail": "aiAnalysis.ts 加入重試邏輯（指數退避 3 次）、超時 30s、斷路器模式",
+    "acceptance": "Ollama 重啟時自動重試、不拋 502、前端顯示「重試中...」"
+  },
+  {
+    "id": "feat-export-pdf",
+    "title": "分析結果匯出 PDF",
+    "detail": "結果頁面加入「匯出 PDF」按鈕，使用 @react-pdf/renderer 或 html2pdf.js",
+    "acceptance": "點擊按鈕 → 下載 PDF → 內含錯誤類型、分析、建議、文檔連結、信心度"
+  }
+]

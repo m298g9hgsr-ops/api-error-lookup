@@ -1,0 +1,75 @@
+﻿name: Auto Dev
+on:
+  schedule:
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  auto-dev:
+    if: github.event.label.name == "auto" || github.event_name == "schedule" || github.event_name == "workflow_dispatch"
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Aider
+        run: pipx install aider-chat
+
+      - name: Configure git
+        run: |
+          git config user.name "auto-dev[bot]"
+          git config user.email "auto-dev@users.noreply.github.com"
+
+      - name: Run Aider on auto issues
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        run: |
+          ISSUES=$(gh issue list --label auto --state open --json number,title,body --jq ".[] | \"\(.number): \(.title) - \(.body)\"")
+          
+          if [ -z "$ISSUES" ]; then
+            echo "No auto issues found"
+            exit 0
+          fi
+
+          echo "$ISSUES" | head -1 | while IFS=":" read -r NUM TITLE BODY; do
+            echo "Processing issue #$NUM: $TITLE"
+            
+            BRANCH="auto/issue-$NUM-$(date +%s)"
+            git checkout -b "$BRANCH"
+            
+            aider \
+              --model openrouter/deepseek/deepseek-coder-v2 \
+              --api-key openrouter=$OPENROUTER_API_KEY \
+              --yes \
+              --message "Issue #$NUM: $TITLE\n\n$BODY\n\n請修改代碼解決此問題，遵循現有代碼風格，包含測試。" \
+              --auto-commits \
+              --dir .
+            
+            git push origin "$BRANCH"
+            gh pr create \
+              --title "Auto: $TITLE" \
+              --body "Fixes #$NUM\n\n由 Aider 自動生成，請審核。" \
+              --base main \
+              --head "$BRANCH"
+            
+            gh issue edit "$NUM" --remove-label auto
+          done

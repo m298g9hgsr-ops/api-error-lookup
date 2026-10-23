@@ -1,0 +1,138 @@
+# GitHub Actions Deploy to Vercel
+# .github/workflows/deploy.yml
+# 
+# Prerequisites:
+# 1. Add VERCEL_TOKEN to GitHub Secrets (from Vercel Account Settings > Tokens)
+# 2. Add VERCEL_ORG_ID and VERCEL_PROJECT_ID to GitHub Secrets
+#    (run `vercel inspect <deployment-url>` to get them, or link project first)
+# 3. Add all production environment variables to Vercel Dashboard
+
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - preview
+          - production
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  # Pre-deployment validation
+  validate:
+    name: Validate & Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Run unit tests
+        run: npm run test:unit
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Run integration tests
+        run: npm run test:integration
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Type check
+        run: npx tsc --noEmit
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Build
+        run: npm run build
+        working-directory: ./pstack-project/api-error-lookup
+
+  # Deploy to Vercel Preview
+  deploy-preview:
+    name: Deploy Preview
+    needs: validate
+    if: github.event.inputs.environment == 'preview' || github.ref != 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: Pull Vercel Environment
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Build Project Artifacts
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Deploy to Vercel Preview
+        run: |
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "PREVIEW_URL=$url" >> $GITHUB_ENV
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Comment Preview URL
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: '🚀 Preview deployment ready: ${{ env.PREVIEW_URL }}'
+            })
+
+  # Deploy to Vercel Production
+  deploy-production:
+    name: Deploy Production
+    needs: validate
+    if: github.event.inputs.environment == 'production' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Vercel CLI
+        run: npm i -g vercel@latest
+
+      - name: Pull Vercel Environment
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Deploy to Vercel Production
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "PRODUCTION_URL=$url" >> $GITHUB_ENV
+        working-directory: ./pstack-project/api-error-lookup
+
+      - name: Notify Deployment Success
+        run: |
+          echo "✅ Production deployed to: ${{ env.PRODUCTION_URL }}"
+          # Add Slack/Discord notification here if needed

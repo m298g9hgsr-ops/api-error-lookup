@@ -1,0 +1,52 @@
+import { NextRequest, NextResponse } from 'next';
+import { PrismaClient } from '@prisma/client';
+import { getSession } from 'next-auth/client';
+import { stripe } from '../../../stripe';
+import { Ollama } from '../../../ollama';
+
+export async function middleware(req: NextRequest) {
+  const session = await getSession({ req });
+  const prisma = new PrismaClient();
+
+  if (session) {
+    const userId = session.user?.id;
+
+    // Check if user already has a subscription
+    const subscription = await prisma.subscription.findUnique({
+      where: { userId },
+    });
+
+    if (!subscription) {
+      // If user does not have a subscription, create a new one
+      const stripeCustomer = await stripe.customers.create({
+        email: session.user?.email,
+      });
+
+      await prisma.subscription.create({
+        data: {
+          userId,
+          stripeCustomerId: stripeCustomer.id,
+          status: 'active',
+        },
+      });
+    }
+  }
+
+  try {
+    const { status, data } = await Ollama.analyze(req.body.errorId);
+
+    if (status !== 'success') {
+      // If the error analysis failed, log the error and return a 500
+      console.error(data);
+      return NextResponse.status(500).json({ message: 'Internal server error' });
+    }
+
+    // If the error analysis was successful, log the error and return the data
+    console.log(data);
+    return NextResponse.json(data);
+  } catch (error) {
+    // If there was an error in the Ollama API call, log the error and return a 500
+    console.error(error);
+    return NextResponse.status(500).json({ message: 'Internal server error' });
+  }
+}

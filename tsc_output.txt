@@ -1,0 +1,193 @@
+src/__tests__/quota.test.ts(1,65): error TS2307: Cannot find module 'vitest' or its corresponding type declarations.
+src/__tests__/quota.test.ts(22,24): error TS7006: Parameter 'callback' implicitly has an 'any' type.
+src/app/api/analyze/route.ts(53,11): error TS2322: Type 'RateLimitHeaders' is not assignable to type 'HeadersInit | undefined'.
+  Type 'RateLimitHeaders' is not assignable to type 'Record<string, string>'.
+    Index signature for type 'string' is missing in type 'RateLimitHeaders'.
+src/app/api/analyze/route.ts(78,11): error TS2322: Type 'RateLimitHeaders' is not assignable to type 'HeadersInit | undefined'.
+  Type 'RateLimitHeaders' is not assignable to type 'Record<string, string>'.
+    Index signature for type 'string' is missing in type 'RateLimitHeaders'.
+src/app/api/analyze/route.ts(150,10): error TS2322: Type 'RateLimitHeaders' is not assignable to type 'HeadersInit | undefined'.
+  Type 'RateLimitHeaders' is not assignable to type 'Record<string, string>'.
+    Index signature for type 'string' is missing in type 'RateLimitHeaders'.
+src/app/api/patterns/route.ts(42,32): error TS2339: Property 'errorPattern' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/app/api/patterns/route.ts(45,35): error TS2339: Property 'errorPattern' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/app/api/patterns/route.ts(53,26): error TS7006: Parameter 'p' implicitly has an 'any' type.
+src/app/dashboard/page.tsx(35,41): error TS2345: Argument of type '{ page: number; limit: number; }' is not assignable to parameter of type '{ page: number; limit: number; sortBy: "type" | "date" | "confidence"; sortOrder: "asc" | "desc"; search?: string | undefined; errorType?: string | undefined; dateFrom?: string | undefined; dateTo?: string | undefined; }'.
+  Type '{ page: number; limit: number; }' is missing the following properties from type '{ page: number; limit: number; sortBy: "type" | "date" | "confidence"; sortOrder: "asc" | "desc"; search?: string | undefined; errorType?: string | undefined; dateFrom?: string | undefined; dateTo?: string | undefined; }': sortBy, sortOrder
+src/app/dashboard/page.tsx(59,31): error TS2339: Property 'isPro' does not exist on type '{ status: "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "trialing"; plan: { name: string; id: string; priceMonthly: number; maxRequestsPerDay: number; features: string[]; ... 4 more ...; stripePriceIdYearly?: string | undefined; }; ... 4 more ...; remainingQuota: number; }'.
+src/app/dashboard/page.tsx(171,29): error TS2339: Property 'Indicator' does not exist on type 'ForwardRefExoticComponent<any>'.
+src/app/dashboard/page.tsx(196,46): error TS2339: Property 'price' does not exist on type '{ name: string; id: string; priceMonthly: number; maxRequestsPerDay: number; features: string[]; isActive: boolean; description?: string | undefined; priceYearly?: number | undefined; stripePriceIdMonthly?: string | undefined; stripePriceIdYearly?: string | undefined; }'.
+src/app/dashboard/page.tsx(196,88): error TS2339: Property 'price' does not exist on type '{ name: string; id: string; priceMonthly: number; maxRequestsPerDay: number; features: string[]; isActive: boolean; description?: string | undefined; priceYearly?: number | undefined; stripePriceIdMonthly?: string | undefined; stripePriceIdYearly?: string | undefined; }'.
+src/app/dashboard/page.tsx(196,115): error TS2339: Property 'currency' does not exist on type '{ name: string; id: string; priceMonthly: number; maxRequestsPerDay: number; features: string[]; isActive: boolean; description?: string | undefined; priceYearly?: number | undefined; stripePriceIdMonthly?: string | undefined; stripePriceIdYearly?: string | undefined; }'.
+src/app/dashboard/page.tsx(196,145): error TS2339: Property 'interval' does not exist on type '{ name: string; id: string; priceMonthly: number; maxRequestsPerDay: number; features: string[]; isActive: boolean; description?: string | undefined; priceYearly?: number | undefined; stripePriceIdMonthly?: string | undefined; stripePriceIdYearly?: string | undefined; }'.
+src/app/dashboard/settings/page.tsx(22,3): error TS2300: Duplicate identifier 'Plus'.
+src/app/dashboard/settings/page.tsx(23,3): error TS2300: Duplicate identifier 'Copy'.
+src/app/dashboard/settings/page.tsx(24,3): error TS2300: Duplicate identifier 'Eye'.
+src/app/dashboard/settings/page.tsx(37,23): error TS2307: Cannot find module '@/components/ui/use-toast' or its corresponding type declarations.
+src/app/dashboard/settings/page.tsx(109,24): error TS2339: Property 'id' does not exist on type '{ name?: string | null | undefined; email?: string | null | undefined; image?: string | null | undefined; }'.
+src/app/dashboard/settings/page.tsx(261,21): error TS2322: Type '(data: ProfileFormValues) => void' is not assignable to type 'FormEventHandler<HTMLFormElement>'.
+  Types of parameters 'data' and 'event' are incompatible.
+    Type 'FormEvent<HTMLFormElement>' is missing the following properties from type '{ language: string; name: string; email: string; timezone: string; }': language, name, email, timezone
+src/app/dashboard/settings/page.tsx(399,21): error TS2322: Type '(data: NotificationFormValues) => void' is not assignable to type 'FormEventHandler<HTMLFormElement>'.
+  Types of parameters 'data' and 'event' are incompatible.
+    Type 'FormEvent<HTMLFormElement>' is missing the following properties from type '{ emailNotifications: boolean; analysisComplete: boolean; weeklyReport: boolean; marketingEmails: boolean; }': emailNotifications, analysisComplete, weeklyReport, marketingEmails
+src/app/dashboard/settings/page.tsx(429,43): error TS2345: Argument of type 'string' is not assignable to parameter of type '"emailNotifications" | "analysisComplete" | "weeklyReport" | "marketingEmails"'.
+src/app/dashboard/settings/page.tsx(430,40): error TS2769: No overload matches this call.
+  Overload 1 of 4, '(names: readonly ("language" | "name" | "email" | "timezone")[], defaultValue?: { language?: string | undefined; name?: string | undefined; email?: string | undefined; timezone?: string | undefined; } | undefined): readonly string[]', gave the following error.
+    Argument of type 'string' is not assignable to parameter of type 'readonly ("language" | "name" | "email" | "timezone")[]'.
+  Overload 2 of 4, '(name: "language" | "name" | "email" | "timezone", defaultValue?: string | undefined): string', gave the following error.
+    Argument of type 'string' is not assignable to parameter of type '"language" | "name" | "email" | "timezone"'.
+  Overload 3 of 4, '(callback: WatchObserver<{ language: string; name: string; email: string; timezone: string; }>, defaultValues?: { language?: string | undefined; name?: string | undefined; email?: string | undefined; timezone?: string | undefined; } | undefined): Subscription', gave the following error.
+    Argument of type 'string' is not assignable to parameter of type 'WatchObserver<{ language: string; name: string; email: string; timezone: string; }>'.
+src/app/dashboard/settings/page.tsx(431,42): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+src/app/dashboard/settings/page.tsx(431,62): error TS2345: Argument of type 'string' is not assignable to parameter of type '"language" | "name" | "email" | "timezone"'.
+src/app/dashboard/settings/page.tsx(669,47): error TS2322: Type '"primary"' is not assignable to type '"default" | "success" | "warning" | "destructive" | "outline" | "secondary" | undefined'.
+src/app/dashboard/settings/page.tsx(700,10): error TS2300: Duplicate identifier 'Plus'.
+src/app/dashboard/settings/page.tsx(700,16): error TS2300: Duplicate identifier 'Copy'.
+src/app/dashboard/settings/page.tsx(700,22): error TS2300: Duplicate identifier 'Eye'.
+src/app/settings/api-keys/page.tsx(13,23): error TS2307: Cannot find module '@/components/ui/use-toast' or its corresponding type declarations.
+src/app/settings/api-keys/page.tsx(202,42): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+src/app/settings/api-keys/page.tsx(302,24): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(302,96): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(304,26): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(304,79): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(307,26): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(307,74): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(310,26): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(310,75): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(315,26): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(317,27): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(396,22): error TS2304: Cannot find name 'Badge'.
+src/app/settings/api-keys/page.tsx(396,65): error TS2304: Cannot find name 'Badge'.
+src/app/settings/notifications/page.tsx(11,23): error TS2307: Cannot find module '@/components/ui/use-toast' or its corresponding type declarations.
+src/app/settings/notifications/page.tsx(148,42): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+src/app/settings/notifications/page.tsx(179,42): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+src/app/settings/profile/page.tsx(10,10): error TS2300: Duplicate identifier 'Label'.
+src/app/settings/profile/page.tsx(13,10): error TS2300: Duplicate identifier 'Separator'.
+src/app/settings/profile/page.tsx(14,10): error TS2300: Duplicate identifier 'AlertDialog'.
+src/app/settings/profile/page.tsx(14,23): error TS2300: Duplicate identifier 'AlertDialogTrigger'.
+src/app/settings/profile/page.tsx(14,43): error TS2300: Duplicate identifier 'AlertDialogContent'.
+src/app/settings/profile/page.tsx(14,63): error TS2300: Duplicate identifier 'AlertDialogHeader'.
+src/app/settings/profile/page.tsx(14,82): error TS2300: Duplicate identifier 'AlertDialogTitle'.
+src/app/settings/profile/page.tsx(14,100): error TS2300: Duplicate identifier 'AlertDialogDescription'.
+src/app/settings/profile/page.tsx(14,124): error TS2300: Duplicate identifier 'AlertDialogFooter'.
+src/app/settings/profile/page.tsx(14,143): error TS2300: Duplicate identifier 'AlertDialogCancel'.
+src/app/settings/profile/page.tsx(14,162): error TS2300: Duplicate identifier 'AlertDialogAction'.
+src/app/settings/profile/page.tsx(15,23): error TS2307: Cannot find module '@/components/ui/use-toast' or its corresponding type declarations.
+src/app/settings/profile/page.tsx(167,66): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/app/settings/profile/page.tsx(180,66): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/app/settings/profile/page.tsx(205,38): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+src/app/settings/profile/page.tsx(216,38): error TS7006: Parameter 'checked' implicitly has an 'any' type.
+src/app/settings/profile/page.tsx(288,10): error TS2300: Duplicate identifier 'Label'.
+src/app/settings/profile/page.tsx(289,10): error TS2300: Duplicate identifier 'Separator'.
+src/app/settings/profile/page.tsx(290,10): error TS2300: Duplicate identifier 'AlertDialog'.
+src/app/settings/profile/page.tsx(290,23): error TS2300: Duplicate identifier 'AlertDialogTrigger'.
+src/app/settings/profile/page.tsx(290,43): error TS2300: Duplicate identifier 'AlertDialogContent'.
+src/app/settings/profile/page.tsx(290,63): error TS2300: Duplicate identifier 'AlertDialogHeader'.
+src/app/settings/profile/page.tsx(290,82): error TS2300: Duplicate identifier 'AlertDialogTitle'.
+src/app/settings/profile/page.tsx(290,100): error TS2300: Duplicate identifier 'AlertDialogDescription'.
+src/app/settings/profile/page.tsx(290,124): error TS2300: Duplicate identifier 'AlertDialogFooter'.
+src/app/settings/profile/page.tsx(290,143): error TS2300: Duplicate identifier 'AlertDialogCancel'.
+src/app/settings/profile/page.tsx(290,162): error TS2300: Duplicate identifier 'AlertDialogAction'.
+src/components/DashboardHistory.tsx(332,33): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/components/DashboardHistory.tsx(572,35): error TS7006: Parameter 'value' implicitly has an 'any' type.
+src/components/ErrorAnalyzer.tsx(109,17): error TS2345: Argument of type '{ errorType: string; confidence: number; analysis: string; suggestions: string[]; model?: string | undefined; id?: string | undefined; documentation?: string[] | undefined; documentationLinks?: { ...; }[] | undefined; ... 4 more ...; latencyMs?: number | undefined; }' is not assignable to parameter of type 'SetStateAction<AnalysisResult | null>'.
+  Property 'createdAt' is missing in type '{ errorType: string; confidence: number; analysis: string; suggestions: string[]; model?: string | undefined; id?: string | undefined; documentation?: string[] | undefined; documentationLinks?: { ...; }[] | undefined; ... 4 more ...; latencyMs?: number | undefined; }' but required in type 'AnalysisResult'.
+src/components/ErrorAnalyzer.tsx(677,21): error TS2322: Type '{ id: string; errorInput: string; errorType: string; cause: string; solution: string; documentationLinks: { title: string; url: string; description?: string; }[]; confidence: number; createdAt: string; userId: string; }' is not assignable to type 'ErrorAnalysisResult'.
+  Types of property 'createdAt' are incompatible.
+    Type 'string' is not assignable to type 'Date'.
+src/components/Providers.tsx(5,36): error TS2307: Cannot find module '@tanstack/react-query-devtools' or its corresponding type declarations.
+src/components/SubscriptionStatus.tsx(61,30): error TS2339: Property 'isPro' does not exist on type '{ status: "active" | "canceled" | "incomplete" | "incomplete_expired" | "past_due" | "trialing"; plan: { name: string; id: string; priceMonthly: number; maxRequestsPerDay: number; features: string[]; ... 4 more ...; stripePriceIdYearly?: string | undefined; }; ... 4 more ...; remainingQuota: number; }'.
+src/components/ui/accordion.tsx(4,37): error TS2307: Cannot find module '@radix-ui/react-accordion' or its corresponding type declarations.
+src/components/ui/alert-dialog.tsx(4,39): error TS2307: Cannot find module '@radix-ui/react-alert-dialog' or its corresponding type declarations.
+src/components/ui/breadcrumb.tsx(8,56): error TS2304: Cannot find name 'nav'.
+src/components/ui/breadcrumb.tsx(20,60): error TS2304: Cannot find name 'ol'.
+src/components/ui/breadcrumb.tsx(26,60): error TS2304: Cannot find name 'li'.
+src/components/ui/breadcrumb.tsx(49,60): error TS2304: Cannot find name 'span'.
+src/components/ui/breadcrumb.tsx(63,65): error TS2304: Cannot find name 'li'.
+src/components/ui/checkbox.tsx(4,37): error TS2307: Cannot find module '@radix-ui/react-checkbox' or its corresponding type declarations.
+src/components/ui/command.tsx(152,40): error TS2322: Type 'HTMLButtonElement | null' is not assignable to type 'HTMLDivElement'.
+  Type 'null' is not assignable to type 'HTMLDivElement'.
+src/components/ui/command.tsx(183,66): error TS18049: 'children' is possibly 'null' or 'undefined'.
+src/components/ui/command.tsx(183,75): error TS2339: Property 'props' does not exist on type 'string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>'.
+  Property 'props' does not exist on type 'string'.
+src/components/ui/command.tsx(184,8): error TS18049: 'children' is possibly 'null' or 'undefined'.
+src/components/ui/command.tsx(184,17): error TS2339: Property 'props' does not exist on type 'string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<...>'.
+  Property 'props' does not exist on type 'string'.
+src/components/ui/progress.tsx(4,36): error TS2307: Cannot find module '@radix-ui/react-progress' or its corresponding type declarations.
+src/components/ui/progress.tsx(26,10): error TS2339: Property 'Indicator' does not exist on type 'ForwardRefExoticComponent<any>'.
+src/components/ui/radio-group.tsx(4,39): error TS2307: Cannot find module '@radix-ui/react-radio-group' or its corresponding type declarations.
+src/components/ui/scroll-area.tsx(4,38): error TS2307: Cannot find module '@radix-ui/react-scroll-area' or its corresponding type declarations.
+src/components/ui/select.tsx(4,34): error TS2307: Cannot find module '@radix-ui/react-select' or its corresponding type declarations.
+src/components/ui/separator.tsx(4,37): error TS2307: Cannot find module '@radix-ui/react-separator' or its corresponding type declarations.
+src/components/ui/switch.tsx(4,35): error TS2307: Cannot find module '@radix-ui/react-switch' or its corresponding type declarations.
+src/hooks/useDashboard.ts(5,42): error TS2305: Module '"@/types"' has no exported member 'RateLimitStatus'.
+src/lib/api-client.ts(1,34): error TS2307: Cannot find module 'next/dist/server/web/spec-extension/fetch' or its corresponding type declarations.
+src/lib/quota.ts(106,32): error TS2339: Property 'quotaUsage' does not exist on type 'Omit<PrismaClient<PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">'.
+src/lib/quota.ts(132,30): error TS2339: Property 'quotaUsage' does not exist on type 'Omit<PrismaClient<PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">'.
+src/lib/quota.ts(137,30): error TS2339: Property 'quotaUsage' does not exist on type 'Omit<PrismaClient<PrismaClientOptions, never, DefaultArgs>, "$connect" | "$disconnect" | "$on" | "$transaction" | "$use" | "$extends">'.
+src/lib/quota.ts(181,36): error TS2339: Property 'quotaUsage' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+src/providers/QueryProvider.tsx(4,36): error TS2307: Cannot find module '@tanstack/react-query-devtools' or its corresponding type declarations.
+src/test/factories/analysis.factory.ts(1,23): error TS2307: Cannot find module '@faker-js/faker' or its corresponding type declarations.
+src/test/factories/analysis.factory.ts(76,5): error TS2353: Object literal may only specify known properties, and 'errorMessage' does not exist in type '{ id: string; createdAt: Date; model: string; analysis: string; userId: string | null; stackTrace: string | null; context: string | null; errorType: string; confidence: number; suggestions: string; documentation: string | null; tokensUsed: number; errorInput: string; }'.
+src/test/factories/plan.factory.ts(1,23): error TS2307: Cannot find module '@faker-js/faker' or its corresponding type declarations.
+src/test/factories/plan.factory.ts(39,5): error TS2322: Type 'Record<string, unknown> | { analysesPerDay: any; }' is not assignable to type 'string'.
+  Type 'Record<string, unknown>' is not assignable to type 'string'.
+src/test/factories/plan.factory.ts(181,43): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(183,21): error TS2345: Argument of type '{ id: string; name: string; displayName: string; price: number; interval: "year"; stripePriceId: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; ... 5 more ...; updatedAt: Date; }' is not assignable to parameter of type 'PlanFactoryOptions'.
+  Types of property 'description' are incompatible.
+    Type 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+src/test/factories/plan.factory.ts(187,30): error TS2339: Property 'displayName' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(190,32): error TS2339: Property 'stripePriceId' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(237,9): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(237,26): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(238,9): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(238,26): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(239,12): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(239,22): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(246,12): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(247,31): error TS2339: Property 'interval' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(248,15): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/plan.factory.ts(262,40): error TS7015: Element implicitly has an 'any' type because index expression is not of type 'number'.
+src/test/factories/plan.factory.ts(289,30): error TS2339: Property 'price' does not exist on type '{ id: string; name: string; description: string | null; priceMonthly: number; priceYearly: number | null; maxRequestsPerDay: number; features: string; stripePriceIdMonthly: string | null; stripePriceIdYearly: string | null; isActive: boolean; createdAt: Date; updatedAt: Date; }'.
+src/test/factories/subscription.factory.ts(1,23): error TS2307: Cannot find module '@faker-js/faker' or its corresponding type declarations.
+src/test/factories/subscription.factory.ts(2,30): error TS2724: '"@prisma/client"' has no exported member named 'SubscriptionStatus'. Did you mean 'Subscription'?
+src/test/factories/subscription.factory.ts(27,3): error TS2741: Property 'canceledAt' is missing in type '{ id: string; userId: any; planId: string; stripeCustomerId: string; stripeSubscriptionId: string; stripePriceId: string; status: any; currentPeriodStart: Date; currentPeriodEnd: Date; cancelAtPeriodEnd: boolean; createdAt: any; updatedAt: Date; }' but required in type '{ id: string; createdAt: Date; updatedAt: Date; status: string; userId: string; planId: string; stripeCustomerId: string | null; stripeSubscriptionId: string | null; stripePriceId: string | null; currentPeriodStart: Date; currentPeriodEnd: Date; cancelAtPeriodEnd: boolean; canceledAt: Date | null; }'.
+src/test/factories/user.factory.ts(1,23): error TS2307: Cannot find module '@faker-js/faker' or its corresponding type declarations.
+src/test/factories/user.factory.ts(2,16): error TS2305: Module '"@prisma/client"' has no exported member 'UserRole'.
+src/test/factories/user.factory.ts(32,5): error TS2353: Object literal may only specify known properties, and 'stripeCustomerId' does not exist in type '{ id: string; name: string | null; createdAt: Date; updatedAt: Date; email: string; passwordHash: string | null; image: string | null; role: string; emailVerified: Date | null; }'.
+src/test/factories/user.factory.ts(214,25): error TS2322: Type '() => string' is not assignable to type 'string'.
+src/test/factories/user.factory.ts(215,29): error TS2322: Type '() => string' is not assignable to type 'string'.
+src/test/factories/user.factory.ts(217,31): error TS2322: Type '() => Date' is not assignable to type 'Date'.
+src/test/factories/user.factory.ts(222,25): error TS2322: Type '() => string' is not assignable to type 'string'.
+src/test/factories/user.factory.ts(223,29): error TS2322: Type '() => string' is not assignable to type 'string'.
+src/test/factories/user.factory.ts(225,31): error TS2322: Type '() => Date' is not assignable to type 'Date'.
+src/test/msw/browser.ts(1,29): error TS2307: Cannot find module 'msw/browser' or its corresponding type declarations.
+src/test/msw/handlers.ts(1,43): error TS2307: Cannot find module 'msw' or its corresponding type declarations.
+src/test/msw/handlers.ts(2,23): error TS2307: Cannot find module '@faker-js/faker' or its corresponding type declarations.
+src/test/msw/handlers.ts(122,42): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(161,42): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(174,38): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(322,37): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(338,41): error TS7031: Binding element 'params' implicitly has an 'any' type.
+src/test/msw/handlers.ts(357,46): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(385,44): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(407,45): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(421,40): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/handlers.ts(447,68): error TS7031: Binding element 'request' implicitly has an 'any' type.
+src/test/msw/node.ts(1,29): error TS2307: Cannot find module 'msw/node' or its corresponding type declarations.
+src/test/sanitization.ts(31,13): error TS2339: Property 'errorMessage' does not exist on type '{ id: string; createdAt: Date; model: string; analysis: string; userId: string | null; stackTrace: string | null; context: string | null; errorType: string; confidence: number; suggestions: string; documentation: string | null; tokensUsed: number; errorInput: string; }'.
+src/test/sanitization.ts(34,7): error TS2353: Object literal may only specify known properties, and 'errorMessage' does not exist in type '{ id: string; createdAt: Date; model: string; analysis: string; userId: string | null; stackTrace: string | null; context: string | null; errorType: string; confidence: number; suggestions: string; documentation: string | null; tokensUsed: number; errorInput: string; }'.
+src/test/sanitization.ts(106,3): error TS2322: Type 'Record<string, unknown>' is not assignable to type 'T'.
+  'T' could be instantiated with an arbitrary type which could be unrelated to 'Record<string, unknown>'.
+src/test/sanitization.ts(106,23): error TS2345: Argument of type 'T' is not assignable to parameter of type 'Record<string, unknown>'.
+src/test/utils.tsx(24,3): error TS2322: Type '{}' is not assignable to type 'TestWrapperProps & Omit<RenderOptions<typeof import("C:/Users/aka21009lkk/Documents/deepseek-harness/default-workspace/pstack-project/api-error-lookup/node_modules/@testing-library/react/node_modules/@testing-library/dom/types/queries"), HTMLElement, HTMLElement>, "wrapper">'.
+  Property 'children' is missing in type '{}' but required in type 'TestWrapperProps'.
+src/test/utils.tsx(215,3): error TS2304: Cannot find name 'expect'.
+src/test/utils.tsx(216,3): error TS2304: Cannot find name 'expect'.
+src/test/utils.tsx(222,5): error TS2304: Cannot find name 'expect'.
+src/test/utils.tsx(224,5): error TS2304: Cannot find name 'expect'.
+src/test/utils.tsx(230,3): error TS2304: Cannot find name 'expect'.
+vitest.config.ts(1,30): error TS2307: Cannot find module 'vitest/config' or its corresponding type declarations.
+vitest.config.ts(2,19): error TS2307: Cannot find module '@vitejs/plugin-react' or its corresponding type declarations.

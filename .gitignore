@@ -1,0 +1,54 @@
+# 依賴
+node_modules/
+.pnp/
+.pnp.js
+
+# 建構輸出
+.next/
+out/
+build/
+dist/
+
+# 測試
+coverage/
+.nyc_output/
+
+# 環境變數
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# npm cache
+.npm-cache/
+
+# 日誌
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# pstack
+.pstack/
+*.pstack.log
+
+# 編譯快取
+*.tsbuildinfo
+next-env.d.ts
+
+# 偵錯
+DEBUG_*
+
+.vercel
+.env*

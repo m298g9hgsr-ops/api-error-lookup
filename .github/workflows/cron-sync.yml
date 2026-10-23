@@ -1,0 +1,40 @@
+# GitHub Actions - Hourly Cron to Sync Stripe Subscriptions
+# Triggers every hour to call /api/cron/sync-subscriptions
+
+name: Cron Sync Subscriptions
+
+on:
+  schedule:
+    # Run at minute 5 of every hour (avoid on-the-hour congestion)
+    - cron: '5 * * * *'
+  workflow_dispatch:  # Allow manual trigger
+
+env:
+  VERCEL_URL: https://api-error-lookup.vercel.app
+  # CRON_SECRET must be set in GitHub Secrets (same value as Vercel Production env)
+
+jobs:
+  sync-subscriptions:
+    name: Sync Stripe Subscriptions
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Trigger Vercel Cron Endpoint
+        run: |
+          response=$(curl -s -w "\n%{http_code}" -X GET \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "${{ env.VERCEL_URL }}/api/cron/sync-subscriptions" \
+            --max-time 30)
+          
+          http_code=$(echo "$response" | tail -n1)
+          body=$(echo "$response" | head -n -1)
+          
+          echo "HTTP Status: $http_code"
+          echo "Response: $body"
+          
+          if [ "$http_code" -ne 200 ]; then
+            echo "❌ Cron sync failed with status $http_code"
+            exit 1
+          fi
+          
+          echo "✅ Cron sync completed successfully"
